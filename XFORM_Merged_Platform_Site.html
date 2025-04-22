@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XFORM Unified Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0d0d0d;
+            color: white;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        video.bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.3);
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
+        }
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #00ffff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ff6600;
+        }
+        .hero, .section {
+            display: block;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 60px;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            color: #00ffff;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            animation: fadeIn 3s ease-in-out;
+        }
+        .btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(to right, #ff6600, #9900ff);
+            color: white;
+            border-radius: 8px;
+            animation: fadeIn 4s ease-in-out;
+        }
+        .btn:hover {
+            transform: scale(1.1);
+        }
+        .section {
+            padding: 100px 20px 60px;
+            text-align: center;
+        }
+        .section h2 {
+            font-size: 2rem;
+            color: #00ffff;
+        }
+        .section p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .login-popup, .dashboard {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(10, 10, 10, 0.95);
+            padding: 30px;
+            border: 2px solid #00ffff;
+            z-index: 999;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .login-popup input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .login-popup button {
+            padding: 10px 20px;
+            background: #00ffff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .dashboard h2 {
+            margin-bottom: 20px;
+        }
+        .dashboard .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+        .grid div {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #00ffff;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .close-btn {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background: #ff6600;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #soundToggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #00ffff;
+            color: black;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<video autoplay muted loop class="bg-video" id="bgVideo">
+    <source src="https://cdn.coverr.co/videos/coverr-futuristic-gym-4011/1080p.mp4" type="video/mp4">
+</video>
+
+<audio id="ambientSound" loop>
+    <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+</audio>
+
+<nav>
+    <a href="#hero">Home</a>
+    <a href="#analytics">Analytics</a>
+    <a href="#grid">HoloGrid</a>
+    <a href="#vault">Vault</a>
+    <a href="#" onclick="showLogin()">Login</a>
+</nav>
+
+<div class="hero" id="hero">
+    <h1>XFORM Platform</h1>
+    <p>Neural Adaptive Performance Hub</p>
+    <a href="#analytics"><button class="btn">Enter Simulation</button></a>
+</div>
+
+<div class="section" id="analytics">
+    <h2>Suit Analytics</h2>
+    <p>Track your vitals, strength output, and recovery status in real-time using XFORM’s adaptive sensor suit.</p>
+</div>
+
+<div class="section" id="grid">
+    <h2>Holographic Grid</h2>
+    <p>Train with augmented reality environments and real-time strategy overlays optimized for squad formations and solo sessions.</p>
+</div>
+
+<div class="section" id="vault">
+    <h2>Vault & Sync</h2>
+    <p>Sync your data, customize your suit, and store your achievements in the cloud-based XFORM Vault.</p>
+</div>
+
+<div class="login-popup" id="loginPopup">
+    <h2>Login to XFORM</h2>
+    <input type="text" placeholder="Username" id="username">
+    <input type="password" placeholder="Password" id="password">
+    <button onclick="login()">Login</button>
+</div>
+
+<div class="dashboard" id="dashboard">
+    <h2>Welcome, <span id="userDisplay"></span></h2>
+    <div class="grid">
+        <div><strong>Stamina:</strong> 92%</div>
+        <div><strong>Energy Output:</strong> 87%</div>
+        <div><strong>Suit Integrity:</strong> 100%</div>
+        <div><strong>Core Temp:</strong> 37.5°C</div>
+        <div><strong>Neural Sync:</strong> Active</div>
+        <div><strong>Last Training:</strong> 3h ago</div>
+    </div>
+    <button class="close-btn" onclick="logout()">Logout</button>
+</div>
+
+<button id="soundToggle" onclick="toggleSound()">♪</button>
+
+<script>
+    const ambientSound = document.getElementById('ambientSound');
+    let soundPlaying = false;
+
+    function toggleSound() {
+        if (soundPlaying) {
+            ambientSound.pause();
+        } else {
+            ambientSound.play();
+        }
+        soundPlaying = !soundPlaying;
+    }
+
+    function showLogin() {
+        document.getElementById('loginPopup').style.display = 'block';
+    }
+
+    function login() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+        if (user && pass) {
+            document.getElementById('userDisplay').textContent = user;
+            document.getElementById('loginPopup').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelectorAll('.section').forEach(el => el.style.display = 'none');
+        } else {
+            alert('Please enter both username and password.');
+        }
+    }
+
+    function logout() {
+        document.getElementById('dashboard').style.display = 'none';
+        document.querySelector('.hero').style.display = 'flex';
+        document.querySelectorAll('.section').forEach(el => el.style.display = 'block');
+    }
+</script>
+
+</body>
+</html>
